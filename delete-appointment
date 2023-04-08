@@ -1,0 +1,29 @@
+<!-- HTML code for displaying user details -->
+<div class="user-details">
+  <span class="user-name">John Doe</span>
+  <span class="user-email">johndoe@example.com</span>
+  <i class="delete-user fa fa-trash"></i>
+</div>
+
+<!-- JavaScript code for handling delete icon click event -->
+<script>
+  // add click event listener to delete icon
+  $('.delete-user').click(function () {
+    // get the user ID from the parent div
+    const userId = $(this).parent().attr('data-user-id');
+
+    // send DELETE request to CRUD API endpoint
+    $.ajax({
+      url: 'https://crudcrud.com/api/YOUR_API_ENDPOINT/' + userId,
+      type: 'DELETE',
+      success: function () {
+        // if deletion is successful, remove the user details from the web page
+        $(this).parent().remove();
+      }.bind(this),
+      error: function (xhr, status, error) {
+        // if deletion fails, log an error message to the console
+        console.error(error);
+      },
+    });
+  });
+</script>
